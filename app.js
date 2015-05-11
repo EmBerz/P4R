@@ -4,8 +4,9 @@
   var Quiz = React.createClass({
 
     render: function(){
-      return <div>boo</div>;
+      return <div>boo {this.props.data}</div>;
     }
   });
-  React.renderComponent(<Quiz />, document.body);
+  React.render(<Quiz data={"foo"}/>, document.getElementById('app'));
+
 })();
