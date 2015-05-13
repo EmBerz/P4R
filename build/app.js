@@ -2,22 +2,55 @@
 (function (){
 /**PLurlsight Course*/
   'use strict';
+  
+  var data = [
+    { name: 'Octavia Butler',
+      imageURL: 'images/authors/octaviabutler',
+      books: ['Parable of the Sower', 'Wild Seed', 'Kindred', 'Fledgling']
+    },
+    { name: 'Mark Twain',
+      imageURL: 'images/authors/marktwain.jpg',
+      books: ['The Adventure of Huckleberry Finn']
+    }
+  ]
   var Quiz = React.createClass({displayName: "Quiz",
-
+    propTypes: {
+      books: React.PropTypes.array.isRequired
+    },
+    getInitialState: function(){
+      return {
+        author: this.props.data[0],
+        books: this.props.data[0].books
+      };
+    },
     render: function(){
       return React.createElement("div", null, 
-        this.props.books.map(function(book){
+        React.createElement("div", {className: "row"}, 
+          React.createElement("div", {className: "col-md-4"}, 
+            React.createElement("img", {src: this.state.author.imageURL, className: "author"})
+          ), 
+          React.createElement("div", {className: "col-md-7"}, 
+        this.state.books.map(function(book){
           return React.createElement(Book, {title: book})
-        })
+        }, this)
+          ), 
+          React.createElement("div", {className: "col-md-1"}
+
+          )
+        )
+
       );
     }
   });
   var Book = React.createClass({displayName: "Book",
+    propTypes:{
+      title: React.PropTypes.string.isRequired
+    },
     render: function(){
-      return React.createElement("div", null, React.createElement("h4", null, this.props.title))
+      return React.createElement("div", {className: "answer"}, React.createElement("h4", null, this.props.title))
     }
   })
-  React.render(React.createElement(Quiz, {books: ["foo", "Parable of the Sower", "Anciliary Sword", "Blindess"]}), document.getElementById('quiz'));
+  React.render(React.createElement(Quiz, {data: data}), document.getElementById('quiz'));
   
 /**Protocol For Relaxation*/
   var Protocol = React.createClass({displayName: "Protocol",
@@ -30,6 +63,9 @@
     }
   });
   var Instruction = React.createClass({displayName: "Instruction",
+    propTypes: {
+      text: React.PropTypes.string
+    },
     render: function(){
       return React.createElement("li", null, 
                 React.createElement("a", null, "@ "), React.createElement("span", null, this.props.text)

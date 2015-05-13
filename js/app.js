@@ -4,12 +4,14 @@
   'use strict';
   
   var data = [
-    {name: 'Mark Twain',
-    imageURL: 'images/authors/marktwain.jpg',
-    books: ['The Adventure of Huckleberry Finn']},
-    {name 'Octavia Butler',
+    { name: 'Octavia Butler',
       imageURL: 'images/authors/octaviabutler',
-      books: ['Parable of the Sower', 'Wild Seed', 'Kindred', 'Fledgling']}
+      books: ['Parable of the Sower', 'Wild Seed', 'Kindred', 'Fledgling']
+    },
+    { name: 'Mark Twain',
+      imageURL: 'images/authors/marktwain.jpg',
+      books: ['The Adventure of Huckleberry Finn']
+    }
   ]
   var Quiz = React.createClass({
     propTypes: {
@@ -25,7 +27,7 @@
       return <div>
         <div className="row">
           <div className="col-md-4">
-            <img src={this.state.author.imageURL} className="author">
+            <img src={this.state.author.imageURL} className="author" />
           </div>
           <div className="col-md-7">
         {this.state.books.map(function(book){
@@ -45,7 +47,7 @@
       title: React.PropTypes.string.isRequired
     },
     render: function(){
-      return <div><h4>{this.props.title}</h4></div>
+      return <div className="answer"><h4>{this.props.title}</h4></div>
     }
   })
   React.render(<Quiz data={data}/>, document.getElementById('quiz'));
