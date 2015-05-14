@@ -1,0 +1,43 @@
+.pass{
+	background-color: green;
+	height: 200px;
+}
+.fail{
+	background-color: red;
+	height: 200px;
+}
+ul{
+	list-style-type: none;
+	text-align: left;
+	margin: 10px;
+	height:70vh;
+	overflow: auto;
+}
+li{
+	margin: 5px;
+	padding: 10px 2px;
+}
+li:hover{
+	background-color: grey;
+}
+div{
+	padding: 5px;
+}
+.slide{
+	border: 1px solid green;
+	max-width: 600px;
+	text-align: center;
+}
+h3{
+	text-align: center;
+}
+.day{
+	margin-top: 0px
+}
+.day div{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.hidden{
+	display: none;
+}

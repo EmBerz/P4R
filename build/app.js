@@ -4,41 +4,85 @@
   'use strict';
   
   var data = [
-    { name: 'Octavia Butler',
-      imageURL: 'images/authors/octaviabutler',
-      books: ['Parable of the Sower', 'Wild Seed', 'Kindred', 'Fledgling']
+    { name: "Ramez Naam",
+      imageURL: "images/authors/rameznaam.jpg",
+      books: ["Nexus","Crux","Apex"]
     },
     { name: 'Mark Twain',
       imageURL: 'images/authors/marktwain.jpg',
       books: ['The Adventure of Huckleberry Finn']
-    }
+    },
+    { name: 'Octavia Butler',
+      imageURL: 'images/authors/octaviabutler',
+      books: ['Parable of the Sower', 'Wild Seed', 'Kindred', 'Fledgling']
+    },
   ]
+  data.selectGame = function(){
+    var books = _.shuffle(this.reduce(function(p,c,i){
+        return p.concat(c.books);
+    }, [])).slice(0,4);
+
+    var answer = books[_.random(books.length-1)];
+
+    return{
+      books: books,
+      author: _.find(this, function(author){
+        return author.books.some(function(title){
+          return title ===answer;
+        });
+      }),
+      checkAnswer: function(title){
+        console.log("CHECK ANSWER ", title);
+        return this.author.books.some(function (t){
+          return t ===title;
+        });
+      }
+    }
+  }
+
   var Quiz = React.createClass({displayName: "Quiz",
     propTypes: {
-      books: React.PropTypes.array.isRequired
+      data: React.PropTypes.array.isRequired
     },
     getInitialState: function(){
-      return {
-        author: this.props.data[0],
-        books: this.props.data[0].books
-      };
+      console.log(data.selectGame());
+      return _.extend({bgClass: 'neutral', showContinue: false}, this.props.data.selectGame());
+    },
+    handleBookSelected: function(title){
+      console.log("Handle Book Selected: ", title);
+      var isCorrect = this.state.checkAnswer(title);
+      
+      this.setState({
+        bgClass: isCorrect ? 'pass' : 'fail',
+        showContinue: isCorrect 
+      });
+    },
+    handleContinue: function(){
+      this.setState(this.getInitialState());
     },
     render: function(){
-      return React.createElement("div", null, 
+      return (React.createElement("div", null, 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-4"}, 
-            React.createElement("img", {src: this.state.author.imageURL, className: "author"})
+            React.createElement("img", {src: this.state.author.imageURL, className: "author", alt: this.state.author.name})
           ), 
           React.createElement("div", {className: "col-md-7"}, 
         this.state.books.map(function(book){
-          return React.createElement(Book, {title: book})
+          return React.createElement(Book, {OnBookSelected: this.handleBookSelected, title: book})
         }, this)
           ), 
-          React.createElement("div", {className: "col-md-1"}
+          React.createElement("div", {className: "col-md-1 "+ this.state.bgClass}
 
           )
-        )
-
+        ), 
+      this.state.showContinue ? 
+          (React.createElement("div", {className: "row"}, 
+              React.createElement("div", {className: "col-md-12"}, 
+                React.createElement("input", {onClick: this.handleContinue, type: "button", value: "Continue"})
+              )
+            )) : React.createElement("span", null)
+      
+      )
       );
     }
   });
@@ -46,42 +90,13 @@
     propTypes:{
       title: React.PropTypes.string.isRequired
     },
+    handleClick: function(){
+      console.log("Handle CLick");
+      this.props.OnBookSelected(this.props.title);
+    },
     render: function(){
-      return React.createElement("div", {className: "answer"}, React.createElement("h4", null, this.props.title))
+      return React.createElement("div", {onClick: this.handleClick, className: "answer"}, React.createElement("h4", null, this.props.title))
     }
   })
   React.render(React.createElement(Quiz, {data: data}), document.getElementById('quiz'));
-  
-/**Protocol For Relaxation*/
-  var Protocol = React.createClass({displayName: "Protocol",
-    render: function(){
-      return React.createElement("ul", null, 
-                this.props.instructions.map(function(instruction){
-                return React.createElement(Instruction, {text: instruction})
-              })
-              )
-    }
-  });
-  var Instruction = React.createClass({displayName: "Instruction",
-    propTypes: {
-      text: React.PropTypes.string
-    },
-    render: function(){
-      return React.createElement("li", null, 
-                React.createElement("a", null, "@ "), React.createElement("span", null, this.props.text)
-             )
-    }
-  })
-  var Slide = React.createClass({displayName: "Slide",
-    render: function(){
-      return React.createElement("div", null, React.createElement("h1", null, "\"Protocol for Relaxation\""), 
-              React.createElement("h2", null, " Day ", this.props.day), 
-              React.createElement(Protocol, {instructions: this.props.instructions})
-              )
-    }
-
-  });
-
-  React.render(React.createElement(Slide, {day: "1", instructions: ["Walk clockwise around the dog", "sit while you clap for 5 seconds", "sit while you jog backwards for 5 seconds"]}), document.getElementById("app"))
-
-})();
+ })(); 
