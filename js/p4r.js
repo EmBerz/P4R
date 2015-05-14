@@ -8,7 +8,7 @@ var data = [
   },
   {
     day: 2,
-    instructions: ["Walk half way around the dog to the left ", "sit while you clap for 15 seconds", "sit while you jog backwards for 2 seconds"]
+    instructions: ["Sit for 10 seconds","Sit while you take 1 step back and return","Sit while you take 3 steps back and return ","Sit for 10 seconds","Sit while you take 3 steps to the right and return ","Sit while you take 3 steps to the left and return ","Sit for 10 seconds","Sit while you take 3 steps to the right and clap your hands ","Sit while you take 3 steps to the left and clap your hands","Sit for 5 seconds","Sit for 10 seconds","Sit while you walk one fourth of the way around the dog to the right ","Sit while you take 4 steps back","Sit while you walk one fourth of the way around the dog to the left ","Sit for 10 seconds","Sit while you take 5 steps back from the dog, clapping your hands, and return","Sit while you walk halfway around the dog to the right and return ","Sit while you walk halfway around the dog to the left and return ","Sit for 10 seconds","Sit while you jog quietly in place for 3 seconds ","Sit while you jog quietly in place for 5 seconds ","Sit while you jog quietly in place for 10 seconds ","Sit for 10 seconds","Sit while you jog one fourth of the way around the dog to the right and return","Sit while you jog one fourth of the way around the dog to the left and return","Sit for 5 seconds","Sit for 10 seconds"]
    
   }
 ]
