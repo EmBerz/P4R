@@ -1,3 +1,28 @@
+header{
+	padding: 10px;
+	background-color: #884a93;
+}
+ul{
+	list-style-type: none;
+	text-align: left;
+	background-color: #C3E997;
+	padding-left: 50px;
+	padding-right: 50px;
+	height:70vh;
+	overflow: auto;
+}
+li{
+	margin: 5px;
+	padding: 10px 2px;
+	background-color: #FFF4A5
+}
+li:hover{
+	background-color: #E0D26F;
+}
+.nav{
+	background-color: #C3E997;
+}
+
 .pass{
 	background-color: green;
 	height: 200px;
@@ -5,23 +30,6 @@
 .fail{
 	background-color: red;
 	height: 200px;
-}
-ul{
-	list-style-type: none;
-	text-align: left;
-	margin: 10px;
-	height:70vh;
-	overflow: auto;
-}
-li{
-	margin: 5px;
-	padding: 10px 2px;
-}
-li:hover{
-	background-color: grey;
-}
-div{
-	padding: 5px;
 }
 .slide{
 	border: 1px solid green;
@@ -35,9 +43,43 @@ h3{
 	margin-top: 0px
 }
 .day div{
-	padding-left: 0px;
-	padding-right: 0px;
+
 }
 .hidden{
 	display: none;
+}
+.arrow-up {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	
+	border-bottom: 5px solid #884a93;
+}
+
+.arrow-down {
+	width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	
+	border-top: 5px solid #884a93;
+}
+
+.arrow-right {
+	width: 0; 
+	height: 0; 
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid #884a93;
+	padding-left: 68px;
+}
+
+.arrow-left {
+	width: 0; 
+	height: 0; 
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent; 
+	border-right:10px solid #884a93; 
+	padding-left: 30px
 }

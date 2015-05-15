@@ -18,6 +18,11 @@ var data = [
         currentDay: 1
       }
     },
+    prevDay: function(){
+      if(this.state.currentDay >1){
+        this.setState({currentDay: this.state.currentDay-1});
+      }
+    },
     nextDay: function(){
       if(this.state.currentDay ===this.props.instructions.length){
         alert("Congrats! You've completed the protocol, start at the beginning and make your dog do more instructions in a row without a treat.")
@@ -30,10 +35,10 @@ var data = [
           console.log("props ", this.props.instructions);
           var current = this.props.instructions[this.state.currentDay-1];
           return  React.createElement("div", {className: "day "}, 
-                    React.createElement("h3", null, 
-                      React.createElement("div", {className: "col-md-1"}, "Left"), 
-                      React.createElement("div", {className: "col-md-10"}, "Day ", this.state.currentDay), 
-                      React.createElement("div", {className: "col-md-1", onClick: this.nextDay}, "Right")
+                    React.createElement("header", {className: "nav"}, 
+                      React.createElement("div", {className: "col-md-2", onClick: this.prevDay}, React.createElement("div", {className: "arrow-left"})), 
+                      React.createElement("div", {className: "col-md-8"}, "Day ", this.state.currentDay), 
+                      React.createElement("div", {className: "col-md-2", onClick: this.nextDay}, React.createElement("div", {className: "arrow-right"}))
                     ), 
                     React.createElement("ul", null, 
                       current.instructions.map(function(i){
@@ -58,11 +63,11 @@ var data = [
       this.setState({failed:true});
     },
     render: function(){
-      return React.createElement("a", {onClick: this.markAsFailed}, 
-              React.createElement("li", {className: "row"}, 
-                React.createElement("span", null, this.props.text)
+      return React.createElement("li", {className: "row", onClick: this.markAsFailed}, 
+                React.createElement("i", {className: this.state.failed? "col-md-1 fa fa-thumbs-o-down" : "col-md-1 "}), 
+                React.createElement("span", {className: "col-md-11"}, this.props.text)
              )
-             )
+             
     }
   })
   var Slide = React.createClass({displayName: "Slide",

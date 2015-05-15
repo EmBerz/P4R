@@ -18,6 +18,11 @@ var data = [
         currentDay: 1
       }
     },
+    prevDay: function(){
+      if(this.state.currentDay >1){
+        this.setState({currentDay: this.state.currentDay-1});
+      }
+    },
     nextDay: function(){
       if(this.state.currentDay ===this.props.instructions.length){
         alert("Congrats! You've completed the protocol, start at the beginning and make your dog do more instructions in a row without a treat.")
@@ -30,11 +35,11 @@ var data = [
           console.log("props ", this.props.instructions);
           var current = this.props.instructions[this.state.currentDay-1];
           return  <div className="day ">
-                    <h3> 
-                      <div className="col-md-1">Left</div>
-                      <div className="col-md-10">Day {this.state.currentDay}</div>
-                      <div className="col-md-1" onClick={this.nextDay}>Right</div>
-                    </h3>
+                    <header className="nav"> 
+                      <div className="col-md-2"  onClick={this.prevDay}><div className="arrow-left"></div></div>
+                      <div className="col-md-8">Day {this.state.currentDay}</div>
+                      <div className="col-md-2" onClick={this.nextDay}><div className="arrow-right"></div></div>
+                    </header>
                     <ul> 
                       {current.instructions.map(function(i){
                         return <Instruction text={i}/>
@@ -58,11 +63,11 @@ var data = [
       this.setState({failed:true});
     },
     render: function(){
-      return <a onClick={this.markAsFailed}>
-              <li className="row">
-                <span>{this.props.text}</span>
+      return <li className="row" onClick={this.markAsFailed}>
+                <i className={this.state.failed? "col-md-1 fa fa-thumbs-o-down" : "col-md-1 "}></i>
+                <span className="col-md-11">{this.props.text}</span>
              </li>
-             </a>
+             
     }
   })
   var Slide = React.createClass({
